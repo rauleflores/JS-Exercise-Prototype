@@ -46,11 +46,9 @@ function Person(name, age) {
 
 }
 Person.prototype.eat = function (edible){
-  // this.stomach.push(edible);
-  return this.stomach.length > 11 ? this.stomach.push(edible) : false;
-  // if (this.stomach.length > 11){
-  //   this.stomach === this.stomach[10];
-  // }
+  if (this.stomach.length < 10){
+    this.stomach.push(edible);
+  }
 }
 Person.prototype.poop = function (){
   this.stomach = [];
@@ -79,15 +77,15 @@ function Car(model, milesPerGallon) {
   this.odometer = 0;
 }
 Car.prototype.fill = function (gallons){
-  this.tank = this.tank + gallons;
+  this.tank += gallons;
 }
 Car.prototype.drive = function(distance){
- 
+  this.odometer += distance;
+  this.tank -= (distance/this.milesPerGallon);
 
-  if(this.tank > 0){
-    this.odometer = this.odometer + distance;
-  }else if (this.tank === 0) {
-    return `I ran out of fuel at ${this.odometer} miles!`
+  if(distance/this.milesPerGallon > this.tank){
+    this.tank = 0;
+    return "I ran out of fuel at " + `${this.odometer}` + " miles!";
   }
 }
 /*
