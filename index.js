@@ -46,13 +46,17 @@ function Person(name, age) {
 
 }
 Person.prototype.eat = function (edible){
-  this.stomach.push(edible);
-  if (this.stomach.length > 11){
-    this.stomach === this.stomach;
-  }
+  // this.stomach.push(edible);
+  return this.stomach.length > 11 ? this.stomach.push(edible) : false;
+  // if (this.stomach.length > 11){
+  //   this.stomach === this.stomach[10];
+  // }
 }
 Person.prototype.poop = function (){
   this.stomach = [];
+}
+Person.prototype.toString = function (){
+  return `${this.name}, ${this.age}`;
 }
 /*
   TASK 2
@@ -68,10 +72,24 @@ Person.prototype.poop = function (){
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
-
+function Car(model, milesPerGallon) {
+  this.model = model;
+  this.milesPerGallon = milesPerGallon;
+  this.tank = 0;
+  this.odometer = 0;
 }
+Car.prototype.fill = function (gallons){
+  this.tank = this.tank + gallons;
+}
+Car.prototype.drive = function(distance){
+ 
 
+  if(this.tank > 0){
+    this.odometer = this.odometer + distance;
+  }else if (this.tank === 0) {
+    return `I ran out of fuel at ${this.odometer} miles!`
+  }
+}
 /*
   TASK 3
     - Write a Baby constructor subclassing Person.
