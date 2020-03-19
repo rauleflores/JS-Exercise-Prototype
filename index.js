@@ -43,7 +43,6 @@ function Person(name, age) {
   this.name = name;
   this.age = age;
   this.stomach = [];
-
 }
 Person.prototype.eat = function (edible){
   if (this.stomach.length < 10){
@@ -56,6 +55,25 @@ Person.prototype.poop = function (){
 Person.prototype.toString = function (){
   return `${this.name}, ${this.age}`;
 }
+// class Person{
+//   constructor(name, age){
+//     this.name = name;
+//     this.age = age;
+//     this.stomach = [];
+//   }
+//   eat(edible){
+//     if(this.stomach.length < 10){
+//       this.stomach.push(edible);
+//     }
+//   }  
+//   poop() {
+//     this.stomach = [];
+//   }
+//   toString() {
+//     return `${this.name}, ${this.age}`
+//   } 
+// }
+
 /*
   TASK 2
     - Write a Car constructor that initializes `model` and `milesPerGallon` from arguments.
@@ -84,7 +102,9 @@ Car.prototype.drive = function(distance){
   this.tank -= (distance/this.milesPerGallon);
 
   if(distance/this.milesPerGallon > this.tank){
+    this.odometer = (distance) - 1;
     this.tank = 0;
+    // console.log("I ran out of fuel at " + `${this.odometer}` + " miles!");
     return "I ran out of fuel at " + `${this.odometer}` + " miles!";
   }
 }
@@ -99,9 +119,11 @@ function Baby(name, age, favoriteToy) {
   Person.call(this, name, age)
   this.favoriteToy = favoriteToy;
 }
+Baby.prototype = Object.create(Person.prototype)
 Baby.prototype.play = function (){
   return "Playing with " + `${this.favoriteToy}`;
 }
+
 
 /* 
   TASK 4
